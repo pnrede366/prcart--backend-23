@@ -6,11 +6,15 @@ exports.getProducts = async (req, res) => {
         res.status(200).json(result)
     } catch (error) {
         console.log(error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 }
 exports.createProduct = async (req, res) => {
+    console.log(req.body);
     try {
-        const product = new Product(req.body)
+        const { title, price, description, features, category } = req.body
+        const file = req?.file?.path
+        const product = new Product({ title, price, description, features, category,file })
         const result = await product.save()
         res.status(200).json({ success: true, result })
     } catch (error) {
@@ -46,3 +50,7 @@ exports.findProductById = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+
+// app.post('/upload', , (req, res) => {
+//     res.send('File uploaded successfully!');
+//   });
