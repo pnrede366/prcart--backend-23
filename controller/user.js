@@ -15,6 +15,7 @@ exports.createUser = async (req, res) => {
         const result = await user.save()
         res.status(200).json(result)
     } catch (error) {
+        console.log(error,req.body);
         if (error.code === 11000) {
             res.status(400).json({ message: 'Username or email already exists' });
         } else {
@@ -26,7 +27,7 @@ exports.createUser = async (req, res) => {
 exports.deleteUser = async (req, res) => {
     try {
         const result = await User.findByIdAndDelete(req.params.id);
-        res.status(200).json({ message: 'User deleted', deletedUser: result });
+        res.status(200).json({ message: 'User deleted', deletedUser: result,success:true });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });

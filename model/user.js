@@ -2,7 +2,7 @@ const { default: mongoose } = require("mongoose");
 
 const UserScheme = new mongoose.Schema({
     mobileNumber: Number,
-    email: String,
+    email: {type:String,unique:true},
     username: {
         type: String,
         required: true,
@@ -11,8 +11,6 @@ const UserScheme = new mongoose.Schema({
     password: String,
     address: {
         type: String,
-        required: true,
-        unique: true
     },
     name: String
 })
