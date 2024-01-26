@@ -1,7 +1,6 @@
 const Category = require('../model/Category')
 
 exports.addCategory = async (req, res) => {
-    console.log(req.body);
     try {
         const category = new Category(req.body)
         const result = category.save()
@@ -13,7 +12,6 @@ exports.addCategory = async (req, res) => {
 }
 
 exports.getCategory = async (req, res) => {
-    console.log(req.body);
     try {
         const result = await Category.find({})
         res.status(200).json({ result, message: 'added', success: true })
